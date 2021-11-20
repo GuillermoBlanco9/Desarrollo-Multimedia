@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">PracticaPaises</string>
+    <string name="action_settings">Configuración</string>
+    <string name="acerca_de">Acerca de</string>
+    <string name="texto_acerca_de">
+     Aplicación creada por (Nombre de los creadores).
+     Esta aplicación muestra una lista de países y su detalle
+    correpondiente, junto con una foto.
+    </string>
+    <string name="configuracion">Configuración</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="switch_preference">Mostrar linea de separación entre elemntos listados</string>
+    <string name="list_preferences">Formato del listado</string>
+    <string name="preference_category">Apariencia</string>
+</resources>

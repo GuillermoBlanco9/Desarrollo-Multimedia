@@ -1,0 +1,77 @@
+<resources>
+    <string name="selecciona_pais">Selecciona un país</string>
+
+    <string-array name="paises">
+        <item>argentina</item>
+        <item>australia</item>
+        <item>belgica</item>
+        <item>canada</item>
+        <item>dinamarca</item>
+        <item>espana</item>
+    </string-array>
+
+    <string-array name="argentina">
+        <item>Argentina</item>
+        <item>@drawable/argentina</item>
+        <item>
+           Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes,
+            lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado.
+            El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires,
+            se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada,
+            el icónico palacio presidencial.
+        </item>
+    </string-array>
+    <string-array name="australia">
+        <item>Australia</item>
+        <item>@drawable/australia</item>
+        <item>
+            Australia es un país rodeado por los océanos Índico y Pacífico.
+            Sus ciudades principales (Sídney, Brisbane, Melbourne, Perth y Adelaida) son costeras.
+            Su capital, Canberra, se encuentra en el interior. El país es conocido por la Casa de la Ópera de Sídney,
+            la Gran Barrera de Coral, una vasta área natural desértica conocida como Outback y especies animales únicas,
+            como el canguro y el ornitorrinco.
+        </item>
+    </string-array>
+    <string-array name="belgica">
+        <item>Bélgica</item>
+        <item>@drawable/belgica</item>
+        <item>
+            Bélgica es un país de Europa Occidental conocido por sus ciudades medievales, su arquitectura renacentista y las sedes centrales de la Unión Europea y la OTAN.
+            El país tiene regiones características, como Flandes en el norte, de habla neerlandesa, Valona en el sur, de habla francesa,
+            y una comunidad de habla alemana en el este. La capital bilingüe, Bruselas, tiene casas consistoriales adornadas en el Gran Palacio y
+            elegantes edificios art-nouveau.
+        </item>
+    </string-array>
+    <string-array name="canada">
+        <item>Canadá</item>
+        <item>@drawable/canada</item>
+        <item>
+            Canadá es el país norteamericano que se extiende desde los Estados Unidos en el sur hasta el círculo polar ártico en el norte.
+            Las ciudades principales incluyen la enorme Toronto, Vancouver, el centro cinematográfico de la costa oeste,
+            las ciudades de habla francesa Montreal y Quebec, y la capital Ottawa. Las vastas franjas de naturaleza de Canadá incluyen
+            el Parque Nacional Banff ubicado en un lago en las Montañas Rocosas. También incluye las cataratas del Niágara,
+            un famoso grupo de enormes cascadas.
+        </item>
+    </string-array>
+    <string-array name="dinamarca">
+        <item>Dinamarca</item>
+        <item>@drawable/dinamarca</item>
+        <item>
+            Dinamarca es un país escandinavo que abarca la península de Jutlandia y varias islas.
+            Está conectado con Suecia a través del puente de Öresund. Copenhague, su capital, cuenta con palacios reales
+            y el colorido puerto de Nyhavn, junto con el parque de atracciones Tívoli y la icónica estatua de "La Sirenita".
+            Odense es la ciudad natal del escritor Hans Christian Andersen, con un centro medieval con calles de adoquines y casas
+            con entramado de madera.
+        </item>
+    </string-array>
+    <string-array name="espana">
+        <item>España</item>
+        <item>@drawable/espana</item>
+        <item>
+            España, país de la península ibérica de Europa, incluye 17 regiones autónomas con diversas características geográficas y culturales.
+            En Madrid, su capital, se encuentra el Palacio Real y el Museo del Prado, que alberga obras de maestros europeos.
+            Segovia tiene un castillo medieval (el Alcázar) y un acueducto romano intacto. La capital de Cataluña,
+            Barcelona, se caracteriza por las obras modernistas extravagantes de Antoni Gaudí, como el templo de la Sagrada Familia.
+        </item>
+    </string-array>
+</resources>
