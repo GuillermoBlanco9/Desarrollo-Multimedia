@@ -25,4 +25,5 @@
     <string name="switch_preference">Mostrar linea de separación entre elemntos listados</string>
     <string name="list_preferences">Formato del listado</string>
     <string name="preference_category">Apariencia</string>
+    <string name="juego">Juego</string>
 </resources>

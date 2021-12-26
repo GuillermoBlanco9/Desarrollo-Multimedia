@@ -12,5 +12,10 @@
         android:orderInCategory="99"
         android:title="@string/acerca_de"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/juegoBanderasFragment"
+        android:orderInCategory="101"
+        android:title="@string/juego"
+        app:showAsAction="never" />
 
 </menu>
