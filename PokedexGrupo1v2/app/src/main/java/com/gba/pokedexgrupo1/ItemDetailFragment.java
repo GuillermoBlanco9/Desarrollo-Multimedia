@@ -27,7 +27,7 @@ public class ItemDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final Integer ARG_ITEM_ID = 0;
     public static final String ARG_ITEM_NAME ="item_name";
     public static final String ARG_DESCRIPTION="item_description";
 
@@ -60,11 +60,11 @@ public class ItemDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey(String.valueOf(ARG_ITEM_ID))) {
             // Load the placeholder content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = PlaceholderContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = PlaceholderContent.ITEM_MAP.get(getArguments().getString(String.valueOf(ARG_ITEM_ID)));
         }
     }
 
