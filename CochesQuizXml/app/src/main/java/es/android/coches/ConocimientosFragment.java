@@ -20,6 +20,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,13 +39,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 public class ConocimientosFragment extends Fragment {
 
     private FragmentConocimientosBinding binding;
 
     List<Pregunta> preguntas;
     int respuestaCorrecta;
+    int respuestaCorrectaXml;
     int puntos;
+    String cadena="";
     ServicioPreguntas servicio;
 
     @Override
@@ -51,6 +60,17 @@ public class ConocimientosFragment extends Fragment {
         try {
             preguntas = new ArrayList<>(servicio.generarPreguntas("coches.xml"));
             Collections.shuffle(preguntas);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if(!fileExists(getContext(), "XmlPuntuacion.xml")){
+
+
+                try {
+                    salvarFichero("XmlPuntuacion.xml","<puntuacion><maxima>"+respuestaCorrectaXml+"</maxima><ultima>"+puntos+"</ultima></puntuacion>");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,7 +83,10 @@ public class ConocimientosFragment extends Fragment {
 
         try {
             presentarPregunta();
+            leerPuntuacionXml();
         } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -71,7 +94,19 @@ public class ConocimientosFragment extends Fragment {
             int seleccionado = binding.radioGroup.getCheckedRadioButtonId();
             CharSequence mensaje = seleccionado == respuestaCorrecta ? "¡Acertaste!" : "Fallaste";
 
-            if(seleccionado == respuestaCorrecta)puntos++;
+            if(seleccionado==respuestaCorrecta){
+
+                mensaje = "¡Acertaste!";
+                puntos++;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if(respuestaCorrectaXml<puntos) {
+                    respuestaCorrectaXml = puntos;
+                    cadena = "¡Has batido tu récord de aciertos! Has alcanzado " + respuestaCorrectaXml+" puntos";
+                }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            }else{
+                mensaje = "Fallaste";
+            }
 
             Snackbar.make(v, mensaje, Snackbar.LENGTH_INDEFINITE)
                     .setAction("Siguiente", v1 -> {
@@ -121,37 +156,11 @@ public class ConocimientosFragment extends Fragment {
             binding.radioGroup.setVisibility(View.GONE);
             binding.botonRespuesta.setVisibility(View.GONE);
             binding.textView.setText("¡Fin!\nTu Puntuación: "+puntos);
-
-            FileInputStream fis = getContext().openFileInput("prueba");
-
-            JSONObject objJson = new JSONObject();
-            objJson.put("puntuacion_maxima",puntos);
-            objJson.put("ultima_puntuacion",puntos);
-
-            String jsonString = objJson.toString();
-
-
-            salvarFichero("prueba",jsonString);
-
-
-
-
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String fileContent = br.readLine();
-            while (fileContent != null) {
-                    sb.append(fileContent).append("\n");
-                    fileContent = br.readLine();
-            }
-            br.close();
-            // This responce will have Json Format String
-            String responce = sb.toString();
-
-            JSONObject imprimir = new JSONObject(responce);
-
-
-            System.out.println(imprimir.get("puntuacion_maxima"));
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            salvarFichero("XmlPuntuacion.xml","<puntuacion><maxima>"+respuestaCorrectaXml+"</maxima><ultima>"+puntos+"</ultima></puntuacion>");
+            if(cadena.equals("")) cadena = "Has conseguido \n"+cadena;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            System.out.println(puntos);
         }
     }
 
@@ -165,4 +174,38 @@ public class ConocimientosFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    public boolean fileExists(Context context, String filename) {
+        File file = context.getFileStreamPath(filename);
+        if (file == null || !file.exists()) {
+            return false;
+        }
+        return true;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void leerPuntuacionXml() throws Exception {
+        Document doc = leerXMLfichero("XmlPuntuacion.xml");
+        Element documentElement = doc.getDocumentElement();
+        NodeList puntuaciones = documentElement.getChildNodes();
+        for(int i=0; i<puntuaciones.getLength(); i++) {
+            if(puntuaciones.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                Element puntuacion = (Element) puntuaciones.item(i);
+                //String nombre = pais.getAttribute("nombre");
+                String puntuacionMaxima = puntuacion.getElementsByTagName("maxima").item(0).getTextContent();
+                respuestaCorrectaXml= Integer.parseInt(puntuacionMaxima);
+            }
+        }
+    }
+
+    private Document leerXMLfichero(String fichero) throws Exception {
+        DocumentBuilderFactory factory =
+                DocumentBuilderFactory.newInstance();
+        DocumentBuilder constructor = factory.newDocumentBuilder();
+        InputStream is = getContext().openFileInput(fichero);
+        Document doc = constructor.parse(is);
+        doc.getDocumentElement().normalize();
+        return doc;
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
